@@ -109,13 +109,13 @@ window.addEventListener("load", () => {
         currentLat = latitude;
         currentLon = longitude;
 
-        // ✅ Get real location name from OpenCage
+        //  Get real location name from OpenCage
         const locationName = await getLocationName(latitude, longitude);
         console.log("Resolved Location:", locationName);
         cityName.textContent = locationName; 
         
 
-        // ✅ Fetch weather using OpenWeatherMap
+        //  Fetch weather using OpenWeatherMap
         getWeatherByCoords(latitude, longitude, true,locationName);
       },
       () => {
@@ -136,20 +136,20 @@ function displayWeather(data, isGeo = false, resolvedName = null) {
     cityName.textContent = data.name || "Unknown Location";
   }
 
-  // ✅ Temperature
+  //  Temperature
   temperature.textContent = `🌡 ${data.main.temp}${unitSymbol}`;
 
-  // ✅ Capitalize first letter of each word in description
+  //  Capitalize first letter of each word in description
   description.textContent = data.weather[0].description.replace(/\b\w/g, c => c.toUpperCase());
 
-  // ✅ Weather icon
+  //  Weather icon
   weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
   weatherIcon.alt = data.weather[0].description;
 
-  // ✅ Show the section
+  //  Show the section
   weatherInfo.classList.remove("hidden");
 
-  // ✅ Weather-based background
+  //  Weather-based background
   const weatherMain = data.weather[0].main.toLowerCase();
   document.body.className = ""; // reset old classes
 
@@ -182,7 +182,7 @@ unitToggle.addEventListener("click", () => {
     unitToggle.textContent = "Switch to °F";
   }
 
-  // ✅ Refresh based on coords if available, else by city name
+  //  Refresh based on coords if available, else by city name
   if (currentLat && currentLon) {
     getWeatherByCoords(currentLat, currentLon, true);
   } else if (cityName.textContent) {
@@ -215,12 +215,13 @@ async function getLocationName(lat, lon) {
     let district = components.state_district || "";
     let country = components.country || "";
 
-    // ✅ return cleaner formatted name
+    //  return cleaner formatted name
     return `${place}, ${district}, ${country}`.replace(/,\s*$/, "");
   } else {
     return "Your Location";
   }
 }
+
 
 
 
